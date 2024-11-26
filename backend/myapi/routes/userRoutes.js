@@ -2,28 +2,83 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const User = require('../models/User');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+
+// Registrar usuário
+router.post('/register', async (req, res) => {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
+    }
+
+    try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'E-mail já cadastrado.' });
+        }
+
+        const newUser = new User({ name, email, password });
+        await newUser.save();
+
+        res.status(201).json({ message: 'Usuário criado com sucesso!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erro ao criar usuário.' });
+    }
+});
 
 // Login de usuário
 router.post('/login', async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const user = await User.findOne({ username });
+    const { email, password } = req.body;
 
-        if (!user || !(await user.comparePassword(password))) {
-            return res.status(401).json({ message: 'Credenciais inválidas' });
+    if (!email || !password) {
+        return res.status(400).json({ message: 'E-mail e senha são obrigatórios.' });
+    }
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: 'Usuário não encontrado.' });
         }
 
-        // Gere o token JWT usando o segredo do .env
-        const token = jwt.sign(
-            { id: user._id, username: user.username },
-            process.env.JWT_SECRET, // Certifique-se de que essa linha está pegando o segredo corretamente
-            { expiresIn: '1h' }
-        );
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ message: 'Senha inválida.' });
+        }
 
-        res.json({ token });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        res.status(200).json({ token, message: 'Login realizado com sucesso!' });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error(error);
+        res.status(500).json({ message: 'Erro ao fazer login.' });
     }
 });
+
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find().select('-password');
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erro ao buscar usuários.' });
+    }
+});
+
+// Rota: DELETE /api/users/:id
+router.delete('/:id', async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'Usuário não encontrado.' });
+        }
+
+        res.status(200).json({ message: 'Usuário excluído com sucesso!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erro ao excluir usuário.' });
+    }
+});
+
 
 module.exports = router;
