@@ -26,13 +26,16 @@ Clone o projeto para sua máquina local:
 
 git clone git@github.com:VictorMhub/desenvolvimento-web-unifor.git
 
+Instale as dependências:
+npm install
+
 ---
 ### **2. Configuração do Back-End**
 1. Acesse a pasta do backend:
 cd backend
 
-2. Instale as dependências:
-npm install
+2. Garanta que tenha o CORS instalado:
+npm install cors
 
 3. Inicie o servidor:
 node app.js
