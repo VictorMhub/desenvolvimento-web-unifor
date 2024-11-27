@@ -34,10 +34,7 @@ npm install
 1. Acesse a pasta do backend:
 cd backend
 
-2. Garanta que tenha o CORS instalado:
-npm install cors
-
-3. Inicie o servidor:
+2. Inicie o servidor:
 node app.js
 
 ---
