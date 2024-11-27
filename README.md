@@ -43,10 +43,8 @@ node app.js
 ---
 
 ## **3. Configuração do Front-End**
-1. Acesse a pasta do front-end:
-cd frontend
 
-2. Abra o arquivo index.html no navegador.
+1. Abra o arquivo index.html no navegador.
 
 ## **Testando o Projeto**
 1. Via Front-End:
