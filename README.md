@@ -22,11 +22,14 @@ Este é um projeto FullStack de gerenciamento de tarefas e usuários, desenvolvi
 ## **Configuração e Execução**
 
 ### **1. Clonar o Repositório**
-Clone o projeto para sua máquina local:
 
+1. Clone o projeto para sua máquina local:
 git clone git@github.com:VictorMhub/desenvolvimento-web-unifor.git
 
-Instale as dependências:
+2. Entre no diretorio do projeto:
+cd desenvolvimento-web-unifor
+
+3. Instale as dependências:
 npm install
 
 ---
