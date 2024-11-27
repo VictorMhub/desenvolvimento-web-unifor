@@ -73,6 +73,7 @@ document.getElementById("save-task-btn").addEventListener("click", () => {
                 document.getElementById("task-title").value = "";
                 document.getElementById("task-description").value = "";
                 document.getElementById("task-completed").checked = false;
+                document.getElementById("task-id").value = "";
                 document.querySelector("#taskModal .btn-close").click(); // Fecha o modal
                 loadTasks(); // Atualiza a lista de tarefas
             })
@@ -104,31 +105,6 @@ document.getElementById("save-task-btn").addEventListener("click", () => {
             });
     }
   });
-
-//Salva uma nova tarefa ou atualiza uma existente
-// const saveTask = async () => {
-//     const title = document.getElementById("task-title").value.trim();
-//     const description = document.getElementById("task-description").value.trim();
-//     const completed = document.getElementById('task-completed').value === 'true';
-//     const taskId = document.getElementById('task-id')
-//     console.log(title);
-    
-
-//     try {
-//         if (taskId) {
-//             await axios.put(`${API_URL}/tasks/${taskId}`, { title, description, completed });
-//         } else {
-//             await axios.post(`${API_URL}/tasks`, { title, description, completed });
-//         }
-//         document.getElementById('taskForm').reset();
-//         document.getElementById('taskId').value = '';
-//         bootstrap.Modal.getInstance(document.getElementById('taskModal')).hide();
-//         loadTasks();
-//     } catch (error) {
-//         console.error(error);
-//         alert('Erro ao salvar tarefa.');
-//     }
-// };
 
 // Edita uma tarefa
 const editTask = async (id) => {
@@ -165,6 +141,10 @@ const logout = () => {
     localStorage.removeItem('token');
     window.location.href = 'login.html';
 };
+
+const adminPage = () => {
+    window.location.href = 'admin.html';
+}
 
 
 // Carrega as tasks ao iniciar
