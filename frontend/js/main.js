@@ -1,24 +1,24 @@
-const API_URL = 'http://localhost:3000/api'; // Atualize conforme necessário
+const API_URL = 'http://localhost:3000/api';
 const token = localStorage.getItem('token');
-console.log(token);
 
-// Verifica se o usuário está autenticado
+
+
 if (!token) {
     window.location.href = 'login.html';
 }
 
-// Configurações do Axios
+
 axios.defaults.headers.common['Authorization'] = token;
 
-// Carrega as tasks
+
 const loadTasks = async () => {
     try {
         const response = await axios.get(`${API_URL}/tasks`);
         const tasks = response.data;
-        console.log(tasks);
+
         
         const taskTable = document.getElementById('taskTable');
-        taskTable.innerHTML = ''; // Limpa a tabela
+        taskTable.innerHTML = ''; 
 
         tasks.forEach((task, index) => {
             const row = `
@@ -37,7 +37,6 @@ const loadTasks = async () => {
         });
     } catch (error) {
         console.error(error);
-        console.log(error);
         alert('Erro ao carregar tarefas.');
     }
 };
@@ -57,10 +56,10 @@ document.getElementById("save-task-btn").addEventListener("click", () => {
     const taskData = { title, description, completed };
   
     if (taskId) {
-        // Editar tarefa existente (PUT)
+   
         axios
             .put(
-                `${API_URL}/tasks/${taskId}`, // Usar o ID para atualização
+                `${API_URL}/tasks/${taskId}`, 
                 taskData,
                 {
                     headers: {
@@ -74,15 +73,15 @@ document.getElementById("save-task-btn").addEventListener("click", () => {
                 document.getElementById("task-description").value = "";
                 document.getElementById("task-completed").checked = false;
                 document.getElementById("task-id").value = "";
-                document.querySelector("#taskModal .btn-close").click(); // Fecha o modal
-                loadTasks(); // Atualiza a lista de tarefas
+                document.querySelector("#taskModal .btn-close").click(); 
+                loadTasks(); 
             })
             .catch((error) => {
                 console.error(error.response?.data?.message || "Erro ao atualizar tarefa");
                 alert("Erro ao atualizar tarefa");
             });
     } else {
-        // Criar nova tarefa (POST)
+        
         axios
             .post(
                 `${API_URL}/tasks`,
@@ -106,7 +105,7 @@ document.getElementById("save-task-btn").addEventListener("click", () => {
     }
   });
 
-// Edita uma tarefa
+
 const editTask = async (id) => {
     try {
         const response = await axios.get(`${API_URL}/tasks/${id}`);
@@ -125,7 +124,7 @@ const editTask = async (id) => {
     }
 };
 
-// Exclui uma tarefa
+
 const deleteTask = async (id) => {
     try {
         await axios.delete(`${API_URL}/tasks/${id}`);
@@ -136,7 +135,7 @@ const deleteTask = async (id) => {
     }
 };
 
-// Logout
+
 const logout = () => {
     localStorage.removeItem('token');
     window.location.href = 'login.html';
@@ -147,5 +146,5 @@ const adminPage = () => {
 }
 
 
-// Carrega as tasks ao iniciar
+
 loadTasks();

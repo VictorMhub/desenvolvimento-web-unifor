@@ -1,15 +1,15 @@
 const API_URL = 'http://localhost:3000/api';
 const token = localStorage.getItem('token');
 
-// Verifica se o usuário está autenticado
+
 if (!token) {
     window.location.href = 'login.html';
 }
 
-// Configurações do Axios
+
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-// Carrega os usuários
+
 const loadUsers = async () => {
     try {
         const response = await axios.get(`${API_URL}/users`);
@@ -37,7 +37,7 @@ const loadUsers = async () => {
     }
 };
 
-// Exclui um usuário
+
 const deleteUser = async (id) => {
     try {
         await axios.delete(`${API_URL}/users/${id}`);
@@ -48,11 +48,11 @@ const deleteUser = async (id) => {
     }
 };
 
-// Logout
+
 const logout = () => {
     localStorage.removeItem('token');
     window.location.href = 'login.html';
 };
 
-// Carrega os usuários ao iniciar
+
 loadUsers();

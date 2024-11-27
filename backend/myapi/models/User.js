@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
 }, { timestamps: true });
 
-// Hash da senha antes de salvar
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     const salt = await bcrypt.genSalt(10);
@@ -15,7 +14,6 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-// Método para verificar senha
 userSchema.methods.comparePassword = function (password) {
     return bcrypt.compare(password, this.password);
 };

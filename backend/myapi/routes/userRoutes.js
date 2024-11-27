@@ -4,7 +4,6 @@ const User = require('../models/User');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-// Registrar usuário
 router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -28,7 +27,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login de usuário
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -65,7 +63,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Rota: DELETE /api/users/:id
 router.delete('/:id', async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);

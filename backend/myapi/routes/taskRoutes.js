@@ -4,7 +4,7 @@ const authenticate = require('../middleware/auth');
 
 const router = express.Router();
 
-// Listar tarefas do usuário
+
 router.get('/', authenticate, async (req, res) => {
     try {
         const tasks = await Task.find({ userId: req.user.id });
@@ -19,7 +19,6 @@ router.get('/:id', authenticate, async (req, res) => {
       const taskId = req.params.id;
       const userId = req.user.id;
   
-      // Encontrar a tarefa e garantir que pertence ao usuário autenticado
       const task = await Task.findOne({ _id: taskId, userId: userId });
   
       if (!task) {
@@ -33,7 +32,6 @@ router.get('/:id', authenticate, async (req, res) => {
     }
   });
 
-// Criar nova tarefa
 router.post('/', authenticate, async (req, res) => {
     console.log('Corpo da requisição:', req.body);
 
@@ -63,26 +61,25 @@ router.post('/', authenticate, async (req, res) => {
 });
 
 
-// Atualizar tarefa
 router.put('/:id', authenticate, async (req, res) => {
     try {
-        const taskId = req.params.id; // ID da tarefa
-        const userId = req.user.id;  // ID do usuário autenticado
+        const taskId = req.params.id; 
+        const userId = req.user.id;  
         console.log(req.body);
         
-        // Encontrar tarefa pertencente ao usuário
+    
         const task = await Task.findOne({ _id: taskId, userId: userId });
 
         if (!task) {
             return res.status(404).json({ message: 'Tarefa não encontrada ou acesso negado.' });
         }
 
-        // Atualizar campos manualmente
+      
         if (req.body.title !== undefined) task.title = req.body.title;
         if (req.body.description !== undefined) task.description = req.body.description;
         if (req.body.completed !== undefined) task.completed = req.body.completed;
 
-        // Salvar alterações
+     
         const updatedTask = await task.save();
 
         res.status(200).json(updatedTask);
@@ -91,18 +88,18 @@ router.put('/:id', authenticate, async (req, res) => {
     }
 });
 
-// Excluir tarefa
+
 router.delete('/:id', authenticate, async (req, res) => {
     try {
         const taskId = req.params.id;
 
-        // Verifica se a tarefa existe e pertence ao usuário autenticado
+      
         const task = await Task.findOne({ _id: taskId, userId: req.user.id });
         if (!task) {
             return res.status(404).json({ message: 'Tarefa não encontrada ou não pertence ao usuário.' });
         }
 
-        // Remove a tarefa usando o método correto
+        
         await Task.deleteOne({ _id: taskId });
 
         res.json({ message: 'Tarefa removida com sucesso.' });
