@@ -1,58 +1,54 @@
-# Projeto FullStack: To-Do List
+# frontend-be
 
-## **Descrição**
-Este é um projeto FullStack de gerenciamento de tarefas e usuários, desenvolvido como parte do curso da UNIFOR. 
+## Tecnologias Utilizadas
 
-### **Tecnologias Utilizadas**
-- **Front-End**: HTML, CSS (Bootstrap) e JavaScript.
-- **Back-End**: Node.js e Express.js.
-- **Banco de Dados**: MongoDB (Atlas).
-- **Autenticação**: JWT (JSON Web Token).
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Vite**: Ferramenta de build rápida e leve para projetos front-end.
+- **Shadcn/UI**: Componentes de interface de usuário para React.
+- **Tailwind CSS**: Framework de CSS utilitário para estilização rápida e eficiente.
+- **JSON Server**: Ferramenta para criação de uma API REST fake.
 
----
+## Instalação
 
-## **Requisitos**
-- **Node.js** (versão 16+ recomendada)
-- **MongoDB Atlas** (configurado e liberado para acesso)
-- **Navegador atualizado** (Google Chrome, Firefox, etc.)
-- Ferramenta para testar APIs: **Insomnia** ou **Postman** (opcional, para testes diretos).
+Para configurar o projeto localmente, siga os passos abaixo:
 
----
+1. Tenha instaladas em sua máquina as ferramentas [Git](https://git-scm.com/), [Node.js](https://nodejs.org/en/) e [Yarn](https://yarnpkg.com/) (ou outro gerenciador de pacotes de sua preferência) para poder trabalhar no projeto.
 
-## **Configuração e Execução**
+2. Clone o repositório:
 
-### **1. Clonar o Repositório**
-Clone o projeto para sua máquina local:
-```bash
-git clone git@github.com:VictorMhub/desenvolvimento-web-unifor.git
+   ```bash
+   git clone https://github.com/VictorMhub/frontend-be.git
+   cd frontend-be
+   ```
 
----
-### **2. Configuração do Back-End**
-1. Acesse a pasta do backend:
-```bash
-cd backend
+3. Instale as dependências:
 
-2. Instale as dependências:
-```bash
-npm install
+   ```bash
+   npm install
+   ```
 
-3. Inicie o servidor:
-```bash
-node app.js
+4. Caso você não tenha, instale o pacote [json-server](https://github.com/typicode/json-server);
+   É necessário deixar o json-server rodando no terminal para que os dados sejam visualizados no projeto.
 
----
+Caso você tenha problemas com o json-server, tente rodá-lo com `npx json-server db.json` ou
+com `yarn json-server <path>/db.json`, em que `<path>` é o caminho completo até o diretório em que o arquivo db.json está localizado.
 
-## **3. Configuração do Front-End**
-1. Acesse a pasta do front-end:
-```bash
-cd frontend
+5. Caso você não tenha, instale a ferramenta de build Vite:
 
-2. Abra o arquivo index.html no navegador.
+   ````bash
+   npm install @vitejs/plugin-react
+   
 
-## **Testando o Projeto**
-1. Via Front-End:
-Utilize o front-end para criar, editar, excluir e listar tarefas.
-Faça login para acessar as funcionalidades protegidas.
-2. Via API (Opcional)
-Teste os endpoints da API usando ferramentas como Insomnia ou Postman.
-Certifique-se de usar o token JWT gerado no login para acessar rotas protegidas.
+6. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+7. Abra o navegador e acesse `http://localhost:3000`.
+
+## Branches
+
+O projeto possui as seguintes branches principais:
+
+- `main`: Contém a versão estável do projeto.
