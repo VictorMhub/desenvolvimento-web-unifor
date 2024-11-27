@@ -23,28 +23,24 @@ Este é um projeto FullStack de gerenciamento de tarefas e usuários, desenvolvi
 
 ### **1. Clonar o Repositório**
 Clone o projeto para sua máquina local:
-```bash
+
 git clone git@github.com:VictorMhub/desenvolvimento-web-unifor.git
 
 ---
 ### **2. Configuração do Back-End**
 1. Acesse a pasta do backend:
-```bash
 cd backend
 
 2. Instale as dependências:
-```bash
 npm install
 
 3. Inicie o servidor:
-```bash
 node app.js
 
 ---
 
 ## **3. Configuração do Front-End**
 1. Acesse a pasta do front-end:
-```bash
 cd frontend
 
 2. Abra o arquivo index.html no navegador.
